@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+.env
+.venv
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Project
+.*.swp
+.DS_Store
+
+# Docker and data (so it doesn't get pushed accidentally if bound locally)
+pg_data/
+redis_data/
