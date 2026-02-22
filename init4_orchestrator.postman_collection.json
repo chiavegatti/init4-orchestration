@@ -1,0 +1,85 @@
+{
+	"info": {
+		"_postman_id": "f5f1bd4a-6e3e-4b68-b805-592d6e3557df",
+		"name": "INIT4 Cognitive Orchestrator API",
+		"description": "Deterministic AI Request Orchestrator and Proxy mapped via LiteLLM.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Chat Completions (Transparent Proxy)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"model\": \"gpt-4o-mini\",\n  \"messages\": [\n    {\"role\": \"user\", \"content\": \"Olá, quem é você e como pode me ajudar nessa orquestração?\"}\n  ],\n  \"metadata\": {\n    \"tenant_id\": \"test_postman\",\n    \"task_type\": \"extraction\",\n    \"force_local\": false\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/v1/chat/completions",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v1",
+						"chat",
+						"completions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Metrics Dashboard Summary",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/v1/metrics",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v1",
+						"metrics"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Health Check API",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/health",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000",
+			"type": "string"
+		}
+	]
+}
