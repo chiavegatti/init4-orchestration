@@ -10,6 +10,7 @@ from src.db.session import get_db
 from src.models.request import RequestLog
 from src.policy.engine import PolicyEngine
 from src.policy.cost import CostEngine
+from src.core.security import verify_service_api_key
 
 router = APIRouter()
 
@@ -63,7 +64,7 @@ def log_transaction_to_db(
 
 @router.post("/chat/completions")
 async def chat_completions(
-    request: Request, background_tasks: BackgroundTasks, db: Session = Depends(get_db)
+    request: Request, background_tasks: BackgroundTasks, db: Session = Depends(get_db), api_key: str = Depends(verify_service_api_key)
 ):
     start_time = datetime.utcnow()
 

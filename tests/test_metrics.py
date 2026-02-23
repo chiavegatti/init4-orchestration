@@ -5,39 +5,10 @@ from src.db.session import get_db
 
 client = TestClient(app)
 
-# Create a mock session
-class MockQuery:
-    def __init__(self, data=None):
-        self.data = data or []
-    def count(self):
-        return len(self.data)
-    def scalar(self):
-        return 0.0
-    def filter(self, *args, **kwargs):
-        return self
-    def order_by(self, *args, **kwargs):
-        return self
-    def offset(self, *args, **kwargs):
-        return self
-    def limit(self, *args, **kwargs):
-        return self
-    def all(self):
-        return self.data
-
-class MockSession:
-    def query(self, *args, **kwargs):
-        return MockQuery()
-
-def override_get_db():
-    try:
-        yield MockSession()
-    finally:
-        pass
-
-app.dependency_overrides[get_db] = override_get_db
+# Mocks moved to conftest.py
 
 def test_get_metrics_summary():
-    response = client.get("/v1/metrics/summary")
+    response = client.get("/v1/metrics/summary", headers={"Authorization": "Bearer test-admin-key"})
     assert response.status_code == 200
     data = response.json()
     assert "total_requests" in data
@@ -46,7 +17,7 @@ def test_get_metrics_summary():
     assert "average_latency_ms" in data
 
 def test_get_metrics_requests():
-    response = client.get("/v1/metrics/requests?limit=10&offset=0")
+    response = client.get("/v1/metrics/requests?limit=10&offset=0", headers={"Authorization": "Bearer test-admin-key"})
     assert response.status_code == 200
     data = response.json()
     assert isinstance(data, list)
