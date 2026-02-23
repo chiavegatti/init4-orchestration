@@ -32,8 +32,8 @@ This document outlines the sequential implementation sprints for the Orchestrato
 - [x] Added automated tests and CI Pipelines inside Github Actions setup.
 
 ### Sprint 6: Analytics API & Polish
-- Develop internal `GET /metrics` endpoints to expose usage and cost data.
-- Finalize documentation and end-to-end testing against the Release Checklist (`ai.docs/12_RELEASE_CHECKLIST.md`).
+- [x] Develop internal `GET /metrics` endpoints to expose usage and cost data.
+- [x] Finalize documentation and end-to-end testing against the Release Checklist (`ai.docs/12_RELEASE_CHECKLIST.md`).
 
 ---
 
