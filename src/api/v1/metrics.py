@@ -5,12 +5,13 @@ from typing import Optional
 
 from src.db.session import get_db
 from src.models.request import RequestLog
+from src.core.security import verify_admin_api_key
 
 router = APIRouter()
 
 
 @router.get("/summary")
-def get_metrics_summary(db: Session = Depends(get_db)):
+def get_metrics_summary(db: Session = Depends(get_db), api_key: str = Depends(verify_admin_api_key)):
     """
     Returns aggregated usage and cost statistics for a given time period or tenant.
     """
@@ -36,7 +37,8 @@ def get_metrics_requests(
     offset: int = Query(0, ge=0),
     tenant_id: Optional[str] = None,
     task_type: Optional[str] = None,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    api_key: str = Depends(verify_admin_api_key)
 ):
     """
     Returns a paginated list of individual request logs for auditing.

@@ -11,6 +11,10 @@ class Settings(BaseSettings):
     LITELLM_API_BASE: str = "http://localhost:4000"
     LITELLM_API_KEY: str = ""
 
+    # Security
+    SERVICE_API_KEY: str = "test-service-key"
+    ADMIN_API_KEY: str = "test-admin-key"
+
     # Pydantic reading from the local .env file (if it exists)
     model_config = SettingsConfigDict(
         env_file=".env", env_file_encoding="utf-8", extra="ignore"
